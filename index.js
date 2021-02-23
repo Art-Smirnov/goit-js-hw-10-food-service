@@ -6,19 +6,25 @@ const Theme = {
   DARK: 'dark-theme',
 };
 const bodyRef = document.querySelector('body');
-console.log(bodyRef);
+
 const checkboxRef = document.querySelector('#theme-switch-toggle');
 const menuContainer = document.querySelector('.js-menu');
 const cardsMarkup = createCardsMarkup(menu);
 
 menuContainer.insertAdjacentHTML('beforeend', cardsMarkup);
 
+// bodyRef.classList.add(Theme.LIGHT);
 checkboxRef.addEventListener('change', onThemeChange);
 
 function onThemeChange() {
-  // bodyRef.classlist.add(Theme.DARK);
+  bodyRef.classList.toggle(
+    bodyRef.classList.contains(Theme.LIGHT) ? Theme.LIGHT : Theme.DARK,
+  );
+  localStorage.setItem('theme', JSON.stringify(bodyRef.classList));
 }
 
 function createCardsMarkup(menu) {
   return menu.map(cardTpl).join('');
 }
+// checkboxRef.checked = true;
+console.log(checkboxRef.checked);
