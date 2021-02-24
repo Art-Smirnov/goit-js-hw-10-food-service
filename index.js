@@ -21,7 +21,7 @@ function onThemeChange() {
   bodyRef.classList.toggle(Theme.DARK);
   bodyRef.classList.toggle(Theme.LIGHT);
 
-  localStorage.setItem('theme', JSON.stringify(bodyRef.classList));
+  save('theme', bodyRef.classList[0]);
 }
 
 function createCardsMarkup(menu) {
@@ -29,12 +29,32 @@ function createCardsMarkup(menu) {
 }
 
 function populateBodyClassList() {
-  const savedMassage = JSON.parse(localStorage.getItem('theme'));
-  console.log(savedMassage);
+  const savedMassage = load('theme');
+
   if (savedMassage) {
-    bodyRef.classList.add(savedMassage[0]);
+    bodyRef.classList.add(savedMassage);
   }
-  if (savedMassage[0] === 'dark-theme') {
+  if (savedMassage === 'dark-theme') {
+    bodyRef.classList.remove(Theme.LIGHT);
     checkboxRef.checked = true;
+  }
+}
+
+function load(key) {
+  try {
+    const serializedState = localStorage.getItem(key);
+
+    return serializedState === null ? undefined : JSON.parse(serializedState);
+  } catch (err) {
+    console.error('Get state error: ', err);
+  }
+}
+
+function save(key, value) {
+  try {
+    const serializedState = JSON.stringify(value);
+    localStorage.setItem(key, serializedState);
+  } catch (err) {
+    console.error('Set state error: ', err);
   }
 }
