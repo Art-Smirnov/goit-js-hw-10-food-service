@@ -5,6 +5,7 @@ const Theme = {
   LIGHT: 'light-theme',
   DARK: 'dark-theme',
 };
+
 const bodyRef = document.querySelector('body');
 bodyRef.classList.add(Theme.LIGHT);
 
@@ -47,21 +48,3 @@ function load(key) {
 function save(key, value) {
   localStorage.setItem(key, value);
 }
-// function load(key) {
-//   try {
-//     const serializedState = localStorage.getItem(key);
-
-//     return serializedState === null ? undefined : JSON.parse(serializedState);
-//   } catch (err) {
-//     console.error('Get state error: ', err);
-//   }
-// }
-
-// function save(key, value) {
-//   try {
-//     const serializedState = JSON.stringify(value);
-//     localStorage.setItem(key, serializedState);
-//   } catch (err) {
-//     console.error('Set state error: ', err);
-//   }
-// }
