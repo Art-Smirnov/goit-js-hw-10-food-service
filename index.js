@@ -35,6 +35,7 @@ function populateBodyClassList() {
   if (savedMassage) {
     bodyRef.classList.add(savedMassage);
   }
+
   if (savedMassage === Theme.DARK) {
     bodyRef.classList.remove(Theme.LIGHT);
     checkboxRef.checked = true;
